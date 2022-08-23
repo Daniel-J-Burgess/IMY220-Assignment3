@@ -4,43 +4,40 @@ class EventHandler
 	{
 		this.events = inEvents;
 
-	}//end constructor
+	}
 
 
-	getEventsBetweenDates(start, end)
+	getEventsBetweenDates( start, end)
 	{
 		return this.events.filter((event) => 
 		{
 			
-			return ((event.dateStart >= start)&&(event.dateEnd<=end));
+			return event.dateStart>=start&&event.dateStart<=end;
 		});
 
-	}//end function
+	}
 
-	getUniqueCreator()
+	getByMonth(month)
 	{
-		return quizzes.reduce((accumulator, currValue) =>
+		return this.events.filter((event) =>
 		{
-			if(accumulator.every((quiz) => {return quiz.creator != currValue.creator})) accumulator.push(currValue);
-			return accumulator;
-
-		}, []);
-
-	}//end function
-
-	getDescriptions(args)
-	{
-		let list;
-		// if given array of objects is provided
-		if(args && arguments[0].constructor === Array) 
-			list = arguments[0];
-		// if list of objects is provided, use that, otherwise use member variable
-		else list = args ? Array.prototype.slice.apply(arguments) : this.quizzes;
-
-		return list.map((quiz) =>
-		{
-			return quiz.quiz + " (created by: " + quiz.creator + "): " + quiz.score + "%";
+			var getMonth = event.dateStart.substring(5,7);
+				
+			return getMonth==month;
 		});
+
+	}
+
+	getDescriptions()
+	{
+		return events.sort(function(a, b) {
+			return a.dateStart.localeCompare(b.dateStart);
+		  }).reduce((returnArray, currentIterationEvent) =>
+		{
+			if(returnArray.every((event) => {return ((event.dateStart != currentIterationEvent.dateStart)||(event.dateEnd!=currentIterationEvent.dateEnd))})) returnArray.push(currentIterationEvent);
+			return returnArray;
+
+		}, []).sort(events.dateStart);
 
 	}//end function
 
