@@ -11,7 +11,7 @@ class EventHandler
 		return this.events.filter((event) => 
 		{
 			
-			return event.dateStart>=start&&event.dateStart<=end;
+			return event.dateStart>=start&&event.dateEnd<=end;
 		});
 
 	}
@@ -71,14 +71,14 @@ class EventHandler
 
 Array.prototype.getEventsBetweenDates=function(start, end){
 	
-	return this.events.filter((event) => 
+	return this.filter((event) => 
 	{
 		
 		return event.dateStart>=start&&event.dateStart<=end;
 	});
 }
 Array.prototype.getByMonth=function(month){
-	return this.events.filter((event) =>
+	return this.filter((event) =>
 	{
 		var getMonth = event.dateStart.substring(5,7);
 			
@@ -87,7 +87,7 @@ Array.prototype.getByMonth=function(month){
 
 };
 Array.prototype.getUniqueDateAndSort=function(){
-	return events.sort(function(a, b) {
+	return this.sort(function(a, b) {
 		return a.dateStart.localeCompare(b.dateStart);
 	  }).reduce((returnArray, currentIterationEvent) =>
 	{
