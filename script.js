@@ -11,4 +11,4 @@ const myEvents = new EventHandler(events);
 
 //console.log(myEvents.getEventsBetweenDates('2022/05/13','2022/06/12'));
 //console.log(myEvents.getByMonth('06'));
-console.log(myEvents.getDescriptions());
+console.log(myEvents.getSummary(events));
